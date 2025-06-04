@@ -11,33 +11,33 @@ const gabarito = Gabarito({
 });
 
 export const metadata: Metadata = {
-    title: 'Next.js Developer Portfolio Template',
-    description: 'Developer-focused portfolio starter built with Next.js, TypeScript, TailwindCSS, and optimized for SEO.',
+    title: 'ARicho - Developer Portfolio',
+    description: 'This site serves as a space for my technical documentation and real-world experiences throughout my journey in DevOps engineering.',
     icons: {
         icon: '/icons/favicon.ico',
         shortcut: '/icons/favicon.ico',
         apple: '/icons/favicon.ico',
     },
-    metadataBase: new URL('https://nextjs-portofolio-website.vercel.app'),
+    metadataBase: new URL('https://lanxic.my.id'),
     openGraph: {
-        title: 'Next.js Developer Portfolio Template',
-        description: 'Developer-focused portfolio starter built with Next.js, TypeScript, TailwindCSS, and optimized for SEO.',
-        url: 'https://nextjs-portofolio-website.vercel.app',
-        siteName: 'Next.js Developer Portfolio Template',
+        title: 'ARicho - Developer Portfolio',
+        description: 'This site serves as a space for my technical documentation and real-world experiences throughout my journey in DevOps engineering.',
+        url: 'https://lanxic.my.id',
+        siteName: 'ARicho - Developer Portfolio',
         images: [
             {
-                url: '/og-image.png',
+                url: 'https://avatars.githubusercontent.com/u/13657184?s…00&u=01e3933d1a0df3e79df6cf7982656b85ff0efbe5&v=4',
                 width: 1200,
                 height: 630,
-                alt: 'Next.js Developer Portfolio Template'
+                alt: 'ARicho - Developer Portfolio'
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Next.js Developer Portfolio Template',
-        description: 'Developer-focused portfolio starter built with Next.js, TypeScript, TailwindCSS, and optimized for SEO.',
-        images: ['/og-image.png']
+        title: 'ARicho - Developer Portfolio',
+        description: 'This site serves as a space for my technical documentation and real-world experiences throughout my journey in DevOps engineering.',
+        images: ['https://avatars.githubusercontent.com/u/13657184?s…00&u=01e3933d1a0df3e79df6cf7982656b85ff0efbe5&v=4']
     }
 }
 
@@ -59,7 +59,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
         <html lang="en" className={`${gabarito.className} ${gabarito.variable}`} suppressHydrationWarning>
         <head>
             <script dangerouslySetInnerHTML={{__html: themeInitScript}}/>
-            <title>My Developer Portfolio</title>
+            <title>ARicho - Developer Portfolio</title>
         </head>
         <body
             className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}

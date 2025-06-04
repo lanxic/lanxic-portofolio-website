@@ -1,0 +1,76 @@
+---
+title: "Mengenal Docker dan Teknologi Container"
+summary: "Docker is a lightweight container platform that simplifies application development and deployment by packaging apps with their dependencies. It enables developers and sysadmins to build, ship, and run applications faster and more efficiently across various environments."
+date: "2019-11-18"
+tags:
+  - bash
+  - docker
+  - virtualisasi
+  - linux
+  - container
+---
+
+# Mengenal Docker dan Teknologi Container
+
+Berkembangnya teknologi virtualisasi yang sangat beragam sangat membantu sekali untuk para pengembang aplikasi dan sistem administrator.
+
+Pengembang dapat dengan mudah mengembangkan suatu aplikasi dengan berbagai tools yang sudah tersedia.
+
+Dari yang dulu kita harus meluangkan waktu untuk menyiapkan images dengan proses instalasi OS hingga berbagai aplikasi yang dibawa sistem tersebut, tentu proses tersebut sangat melelahkan.
+
+Bisa dibayangkan, dengan banyaknya virtualisasi yang berjalan di sebuah server, akan sangat memberatkan sistem tersebut.
+
+Namun, seiring modernisasi teknologi, kini proses tersebut dapat dipersingkat dan sangat efisien dari berbagai langkah rumit yang memusingkan.
+
+## Teknologi Container
+
+Teknologi container kemudian datang dan membawa beberapa perubahan. Dengan container, sebuah program “diikat” beserta library-nya, file konfigurasi, dan seluruh hal yang dibutuhkannya.
+
+Perbedaan yang sangat terlihat dibandingkan dengan virtualisasi adalah **container memiliki ukuran file yang jauh lebih kecil** karena tidak perlu menyiapkan sistem operasi secara penuh.
+
+> Dalam hal ini, pengembang biasa menyebutnya sebagai *lightweight* platform.
+
+Aplikasi yang berjalan menggunakan container pun jauh lebih cepat dan lebih efisien.
+
+> [Docker](https://www.docker.com/) adalah salah satu platform yang dibangun berdasarkan teknologi container.
+
+## Apa itu Docker?
+
+Docker merupakan sebuah proyek open-source yang menyediakan platform terbuka untuk developer maupun sysadmin agar dapat membangun, mengemas, dan menjalankan aplikasi di mana pun sebagai sebuah wadah (*container*) yang ringan.
+
+![Docker Architecture](https://docs.docker.com/engine/article-img/architecture.svg)
+
+Dengan sangat populernya Docker, sebagian orang bahkan sering menganggap Docker sebagai sebutan lain untuk container.
+
+Docker pertama kali dikembangkan oleh **Solomon Hykes** sebagai proyek internal di dotCloud bersama dengan beberapa koleganya seperti **Andrea Luzzardi** dan **Francois-Xavier Bourlet**.
+
+Perilisan platform ini secara open-source dilakukan pada Mei 2013.
+
+Docker terus berkembang hingga memiliki ribuan kontributor aktif yang membantu meningkatkan kualitas platform ini.
+
+## Perbedaan Docker vs Virtualisasi
+
+Berbeda dengan virtualisasi, di mana aplikasi berjalan di atas hypervisor dan guest OS, Docker dapat menjalankan aplikasi langsung tanpa kedua hal tadi.
+
+Docker juga dilengkapi dengan fitur **sandbox** yang menjamin pengerjaan pengembang dan sysadmin tidak terganggu.
+
+> **Sandbox** dalam istilah keamanan komputer adalah mekanisme pemisahan aplikasi atau program tanpa mengganggu host (*isolasi*).
+
+- **Bagi pengembang:** Sandbox menjamin aplikasinya dapat berjalan tanpa ada gangguan atas perubahan lingkungan host.
+- **Bagi sysadmin:** Menjamin host server yang dikelola tidak terganggu dan dapat melakukan update tanpa takut mengganggu aplikasi.
+
+## Keuntungan Menggunakan Docker
+
+Dikutip dari situs resmi [Docker](https://www.docker.com/), pengembang dapat **mengefektifkan waktu** mereka dengan menghilangkan proses konfigurasi yang cocok dengan programnya.
+
+Selain itu, berkat fitur sandbox, pengembang bisa lebih leluasa untuk berkreasi **tanpa takut merusak** programnya.
+
+Docker juga menjamin program yang kita buat **akan selalu berjalan seperti seharusnya**, karena pemaketan aplikasi dan seluruh kebutuhannya memastikan aplikasi berjalan lancar pada kondisi lingkungan apa pun.
+
+---
+
+### 🔗 Sumber Referensi:
+
+- [Docker.com](https://www.docker.com/)
+- [Wikipedia - Docker (software)](https://en.wikipedia.org/wiki/Docker_(software))
+- [Fahmi.my.id – Apa Itu Docker](http://www.fahmi.my.id/apa-itu-docker.html)

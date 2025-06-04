@@ -38,21 +38,16 @@ export default function Home() {
             >
                 {/* Introductory Text */}
                 <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-                    Hi, I&#39;m John Doe 👋
+                    Hi, I&#39;m Alex — welcome to my official page.
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left mb-6">
-                    I&#39;m a software engineer passionate about solving problems, building things, and reading sci-fi.
-                    Whenever I&#39;m not coding, you can find me exploring the world, playing tennis or skating.
-                    I love to share my knowledge and experiences through my blog, where I write about tech, books, and
-                    life lessons.
+                    This site serves as a space for my technical documentation and real-world experiences throughout my journey in DevOps engineering.
                 </p>
 
                 {/* Current Work Description or other highlights */}
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left">
-                    I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable
-                    applications and improving user experiences. I have a keen interest in full-stack development,
-                    particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver
-                    high-quality software solutions.
+                    I specialize in infrastructure automation, CI/CD pipelines, and cloud-native solutions. With a strong focus on system reliability, scalability, and developer efficiency, I enjoy bridging the gap between development and operations.
+                    From writing infrastructure-as-code to monitoring complex systems, I believe that well-orchestrated automation is key to building resilient and high-performing tech environments.
                 </p>
 
 
@@ -62,14 +57,13 @@ export default function Home() {
 
                     <div className="flex flex-wrap justify-center gap-3 px-4 max-w-4xl mx-auto">
                         {[
-                            {icon: FaBuilding, label: "Hypernova Labs"},
-                            {icon: FaUniversity, label: "Computer Science Grad @ VuA"},
-                            {icon: FaMapMarkerAlt, label: "Lille, France"},
-                            {icon: FaBook, label: "Book Reviewer"},
-                            {icon: FaLanguage, label: "EN / ES / DE"},
-                            {icon: FaTools, label: "Full-Stack Dev"},
+                            {icon: FaBuilding, label: "Mailokal Labs"},
+                            {icon: FaUniversity, label: "Computer Science"},
+                            {icon: FaMapMarkerAlt, label: "Bali, Indonesia"},
+                            {icon: FaBook, label: "Researcher enthusiast"},
+                            {icon: FaLanguage, label: "EN / ID"},
+                            {icon: FaTools, label: "Full-Stack Dev / DevOps"},
                             {icon: FaGamepad, label: "Sci-fi Fan"},
-                            {icon: FaSkiing, label: "Skiing Enthusiast"},
                         ].map((fact, i) => {
                             const Icon = fact.icon;
                             return (

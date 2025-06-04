@@ -1,0 +1,70 @@
+---
+title: "Elasticsearch Backup and Restore using Snapshot"
+summary: "A practical guide to backing up and restoring Elasticsearch using snapshot functionality, integrated with AWS S3 for remote storage. This document is designed for system administrators managing Elasticsearch infrastructure."
+date: "2017-02-23"
+tags:
+  - elasticsearch
+  - Backup/Restore
+  - python
+  - docker
+---
+
+*[Elasticsearch][1]* is a search engine based on Lucene. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
+Elasticsearch is developed in Java and is released as open source under the terms of the Apache License([wikipedia](https://en.wikipedia.org/wiki/Elasticsearch)).
+
+For backing up and restore data Elasticsearch have feature for that is a snapshot.
+
+
+| Target Audience      | Document Owner | Subject                               |
+| :-----------------   | :------------- | :------------------------------------ |
+| System Administrator | lanxic         | Backup and restore data elasticsearch |
+
+
+This Technical document contains for backup and restore snapshot of Elasticsearch then upload to S3 Bucket.
+
+### Todo
++ Install python 2.7.x (Iam only tested version 2.7).
++ Install component packages.
++ Testing for backup.
++ Testing for restore.
+
+### Install python-pip
+Install using apt-get for quick.
+
+```sh
+alex@Alex-Laptop:~$ apt-get install -y python-pip
+alex@Alex-Laptop:~$ python --version
+Python 2.7.6
+```
+
+### Install component packages
+After we install pip now we can install all requirement packages.
+
+```sh
+alex@Alex-Laptop:~$ sudo pip install -r req.txt
+```
+wait until installing finish.
+
+### Testing
+See `es-config.json` please add your aws_access_key_id and aws_secret_access_key for your bucket.
+
+```sh
+alex@Alex-Laptop:~$ ./es-backup-restore.py
+Usage: es-backup-restore.py [OPTIONS]
+example: es-backup-restore.py -c es-config.json -a localhost -p 9200 -b backup|restore
+
+Where OPTIONS:
+-a HOST       Specify URL address of the Elasticsearch server
+-p PORT       Specify Port of the Elasticsearch server
+-c FILE       Specify path of config file
+-h            Printing the help
+-b            To do job ex:backup or restore
+-v            Print the version
+```
+well in the OPTIONS we can see how to work with this script.
+just follow that example if you want to backup use option `-b` with backup and if you want to restore change with restore.
+
+*NOTE : this code only work in same server with elasticsearch machine.*
+
+
+[1]: https://www.elastic.co

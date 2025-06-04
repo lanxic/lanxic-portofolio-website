@@ -1,0 +1,50 @@
+---
+title: "Kasirin Online"
+teamSize: 1
+role: "Full Stack Developer"
+description: "A platform for point of sales integrate to payment gateway."
+duration: "10/2019–01/2020"
+techStack:
+  - flutter
+  - Flask
+  - PostgreSQL
+  - AWS
+  - Docker
+  - Git
+  - Nginx
+githubUrl: "https://github.com/lanxic"
+---
+
+# Introduction
+
+A platform for point of sales integrate to payment gateway.
+
+## Key Features
+
+- **Cross-Platform POS Interface**: Built with Flutter for mobile-first experience, supporting both Android and iOS.
+- **Payment Gateway Integration**: Real-time transaction processing through secure API integration.
+- **RESTful Backend Services**: Developed with Flask to handle sales operations, authentication, and reporting.
+- **Cloud Deployment (AWS)**: Hosted on AWS EC2 for flexibility, uptime, and deployment scalability.
+- **Containerized Infrastructure**: Docker used to isolate environments and simplify deployment.
+- **Reliable Data Layer**: PostgreSQL for structured transaction storage and reporting data.
+- **Reverse Proxy & Routing**: Nginx set up as reverse proxy for performance and HTTPS support.
+- **Version Control**: Managed with Git for team collaboration and change tracking.
+
+## Technical Insights
+
+- Designed modular REST APIs with Flask using blueprint architecture to keep the backend scalable.
+- Integrated external payment gateway via token-based authentication and transaction callback handlers.
+- Used Docker Compose to orchestrate development containers for Flask, PostgreSQL, and Nginx.
+- Configured AWS EC2 instances with secure SSH access and Nginx as a reverse proxy/load balancer.
+
+## Challenges and Solutions
+
+- **Handling secure transactions in an unstable internet environment**: Implemented retry logic and local transaction queuing when offline, with sync upon reconnection.
+- **Syncing client-side (Flutter) and server-side (Flask) data structures**: Created shared models and validation logic to ensure consistency between mobile UI and API.
+
+## Outcome
+
+- Delivered a fully working MVP within 3 months.
+- Enabled real-time payments with reduced transaction errors.
+- Improved deployment consistency and rollback capability using Docker.
+- Successfully demonstrated POS system feasibility for mobile-first markets.

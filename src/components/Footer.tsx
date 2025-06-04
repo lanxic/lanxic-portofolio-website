@@ -13,7 +13,7 @@ export default function Footer() {
         >
             <div className="flex justify-center gap-6 mb-2 text-lg">
                 <Link
-                    href="/"
+                    href="https://github.com/lanxic"
                     aria-label="GitHub"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
                 >
@@ -28,34 +28,13 @@ export default function Footer() {
                 </Link>
                 <Link
                     href="/"
-                    aria-label="GoodReads"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaGoodreads/>
-                </Link>
-                <Link
-                    href="/"
                     aria-label="Instagram"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
                 >
                     <FaInstagram/>
                 </Link>
                 <Link
-                    href="/"
-                    aria-label="X"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaXTwitter/>
-                </Link>
-                <Link
-                    href="/"
-                    aria-label="Reddit"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaReddit/>
-                </Link>
-                <Link
-                    href="mailto:<EMAIL>"
+                    href="mailto:lanxic@gmail.com"
                     target="_blank"
                     aria-label="Email"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
@@ -65,27 +44,25 @@ export default function Footer() {
             </div>
 
             {/* Copyright section */}
-            <p className="text-xs sm:text-sm">© {new Date().getFullYear()} John Doe. All rights reserved.</p>
+            <p className="text-xs sm:text-sm">© {new Date().getFullYear()} ARicho. All rights reserved.</p>
 
             {/* Display version & Link to GitHub Repo */}
             {/* You can update or remove this for your own template */}
             <p className="text-xs sm:text-sm">
-                <Link href={`https://github.com/alemoraru/nextjs-portofolio-website/releases/tag/v${appVersion}`}
-                      rel="noopener noreferrer">
-                    <span
-                        className="font-semibold hover:text-blue-500 transition-colors duration-200"
-                    >
+                <span
+                    className="font-semibold hover:text-blue-500 transition-colors duration-200"
+                >
                         v{appVersion}
                     </span>
-                </Link>
-                &nbsp;built by&nbsp;
-                <Link href="https://github.com/alemoraru" rel="noopener noreferrer">
+                &nbsp;— built by&nbsp;
+                <Link href="https://github.com/lanxic" rel="noopener noreferrer">
                     <span
                         className="font-semibold hover:text-blue-500 transition-colors duration-200"
                     >
-                        @alemoraru
+                        @lanxic
                     </span>
                 </Link>
+                &nbsp;forked from&nbsp;<Link href={'https://github.com/alemoraru/nextjs-portofolio-website'}>@alemoraru</Link>
             </p>
         </footer>
     )
