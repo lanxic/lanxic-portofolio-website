@@ -4,22 +4,25 @@ import {useMemo} from "react";
 /**
  * NotFound component that displays a 404 error message when a page is not found.
  */
+
+
+// Fun bash commands or dev quotes, all indicating a page is not found
+const funLines = [
+    'echo "Oops! This page is 404 not found-ish"',
+    'echo "404: This is not the page you are looking for!"',
+    'echo "cd /dev/null # Page not found"',
+    'echo "cat ~/nowhere # No such file or directory"',
+    'echo "git checkout --the-missing-page"',
+    'echo "rm -rf ./this-page # Already gone!"',
+    'echo "curl -I /404 | grep not-found"',
+    'echo "find . -name missing-page # 0 results"',
+    'echo "ls ~/404 # Not found"',
+    'echo "exit 404 # Page not found-ish"',
+    'echo "// TODO: Implement this page"',
+    'echo "¯\\_(ツ)_/¯ # 404 not found"',
+];
+
 export default function NotFound() {
-    // Fun bash commands or dev quotes, all indicating a page is not found
-    const funLines = [
-        'echo "Oops! This page is 404 not found-ish"',
-        'echo "404: This is not the page you are looking for!"',
-        'echo "cd /dev/null # Page not found"',
-        'echo "cat ~/nowhere # No such file or directory"',
-        'echo "git checkout --the-missing-page"',
-        'echo "rm -rf ./this-page # Already gone!"',
-        'echo "curl -I /404 | grep not-found"',
-        'echo "find . -name missing-page # 0 results"',
-        'echo "ls ~/404 # Not found"',
-        'echo "exit 404 # Page not found-ish"',
-        'echo "// TODO: Implement this page"',
-        'echo "¯\\_(ツ)_/¯ # 404 not found"',
-    ];
     const randomLine = useMemo(() => funLines[Math.floor(Math.random() * funLines.length)], []);
 
     return (
