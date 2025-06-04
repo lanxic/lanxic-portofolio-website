@@ -1,0 +1,109 @@
+---
+title: "How to use ssh forwarding on Ansible"
+summary: "Ansible is an open-source automation engine that automates cloud provisioning, configuration management, and application deployment. Once installed on a control node, Ansible, which is an agentless architecture, connects to a managed node through the default OpenSSH connection type."
+date: "2025-05-18"
+tags:
+  - git
+  - ansible
+  - ssh
+  - automation
+  - devops
+---
+
+*[Ansible][1]* is an open-source automation engine that automates cloud provisioning, configuration management, and application deployment.
+Once installed on a control node, Ansible, which is an agentless architecture, connects to a managed node through the default OpenSSH connection type.
+
+This Technical document contains how to used ssh forward agent for deployment of Ansible.
+
+### Todo
++ Goto your ansible directory.
++ Create file ansible.cfg in root directory.
++ Create ssh-config in group_var.
++ Give host inventory.
++ tester.
+
+In this env Iam using ubuntu14, python2.7.5 and ansible 2.2.0.0
+
+oiya...I forgot for use ssh in ansible we must install sshpass because ansible need this tool.
+
+if you using ubuntu you can run using apt `sudo apt-get install -y sshpass`.
+
+Go to your ansible project and create ansible.cfg in root directory.
+you can follow like my configuration in below:
+
+```
+[ssh_connection]
+ssh_args = -o ControlPersist=15m -F group_vars/ssh_config -q
+scp_if_ssh = True
+control_path = ~/.ssh/ansible-%%r@%%h:%%p
+```
+
+To be clear, the main configuration necessary here is the addition of the [ssh_connection] configuration:
+
++ The ssh_args configuration includes the -F switch which references the ssh-config file we created earlier on.
+
++ For more information on SSH arguments, check out the man page.
+
++ Given that these instances are all potentially fairly vanilla, enabling scp as a replacement to sftp is a good idea (scp_if_ssh).
+
++ With the jump through the bastion, defining the control_path makes life a little easier in managing connection socket.
+
+After that we must create ssh config file for this example I put in group_var you can put anywhere you want just make same path in ansible.cfg.
+
+```
+Host cool-nat-doc
+  HostName 192.168.2.12
+  User root
+  Port 22
+  IdentityFile ~/.ssh/id_rsa
+  ForwardAgent yes
+  ControlMaster auto
+  ControlPath ~/.ssh/ansible-%r@%h:%p
+  ControlPersist 5m
+
+Host cool-web-doc
+  HostName 172.18.0.11
+  User root
+  IdentityFile ~/.ssh/id_rsa
+  ProxyCommand ssh cool-nat-doc -W %h:%p -F group_vars/ssh_config
+```
+
+For that config Iam using proxy command and use group_var/ssh_config for refrence.
+
+Ok...for now we must setup inventory host, in my configure I put host into my inventory.
+
+```
+[tester]
+cool-web-doc
+```
+
+I think that&#039;s enough ok lets test.
+
+```
+alex@Alex-Laptop:~/src/listen/ansible_ges$ ansible-playbook -i hosts.ini site-test.yml -vvv
+Using /home/alex/src/listen/ansible_ges/ansible.cfg as config file
+
+PLAYBOOK: site-test.yml ********************************************************
+1 plays in site-test.yml
+
+PLAY [tester] ******************************************************************
+
+TASK [setup] *******************************************************************
+Using module file /usr/local/lib/python2.7/dist-packages/ansible/modules/core/system/setup.py
+<cool-web-doc> ESTABLISH SSH CONNECTION FOR USER: root
+<cool-web-doc> SSH: EXEC ssh -o ControlPersist=15m -F group_vars/ssh_config -q -o Port=22 -o 'IdentityFile="/home/alex/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o User=root -o ConnectTimeout=10 -o 'ControlPath=~/.ssh/ansible-%r@%h:%p' cool-web-doc '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo $HOME/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792 `" && echo ansible-tmp-1484636259.02-220965930139792="` echo $HOME/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792 `" ) && sleep 0'"'"''
+<cool-web-doc> PUT /tmp/tmpKlYq4Z TO /root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/setup.py
+<cool-web-doc> SSH: EXEC scp -o ControlPersist=15m -F group_vars/ssh_config -q -o Port=22 -o 'IdentityFile="/home/alex/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o User=root -o ConnectTimeout=10 -o 'ControlPath=~/.ssh/ansible-%r@%h:%p' /tmp/tmpKlYq4Z '[cool-web-doc]:/root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/setup.py'
+<cool-web-doc> ESTABLISH SSH CONNECTION FOR USER: root
+<cool-web-doc> SSH: EXEC ssh -o ControlPersist=15m -F group_vars/ssh_config -q -o Port=22 -o 'IdentityFile="/home/alex/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o User=root -o ConnectTimeout=10 -o 'ControlPath=~/.ssh/ansible-%r@%h:%p' cool-web-doc '/bin/sh -c '"'"'chmod u+x /root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/ /root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/setup.py && sleep 0'"'"''
+<cool-web-doc> ESTABLISH SSH CONNECTION FOR USER: root
+<cool-web-doc> SSH: EXEC ssh -o ControlPersist=15m -F group_vars/ssh_config -q -o Port=22 -o 'IdentityFile="/home/alex/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o User=root -o ConnectTimeout=10 -o 'ControlPath=~/.ssh/ansible-%r@%h:%p' -tt cool-web-doc '/bin/sh -c '"'"'/usr/bin/python /root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/setup.py; rm -rf "/root/.ansible/tmp/ansible-tmp-1484636259.02-220965930139792/" > /dev/null 2>&1 && sleep 0'"'"''
+ok: [cool-web-doc]
+
+PLAY RECAP *********************************************************************
+cool-web-doc               : ok=1    changed=0    unreachable=0    failed=0
+```
+
+that's it we got ok from ansible.
+
+[1]: https://www.ansible.com

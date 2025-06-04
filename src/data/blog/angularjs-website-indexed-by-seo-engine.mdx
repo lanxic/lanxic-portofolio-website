@@ -1,0 +1,63 @@
+---
+title: "AngularJS website indexed by SEO engine (faceboook bot, twitter bot, etc)"
+summary: "Learn how to make your AngularJS application SEO-friendly by replacing hashbang URLs with pretty HTML5 URLs, improving crawlability and user experience through proper configuration."
+date: "2024-11-04"
+tags:
+  - angularjs
+  - apache
+---
+
+AngularJS projects by default using the hashbang syntax for urls to handle navigation without forcing the client to reload the whole application on every state change.
+this make some problem if we want using SEO, the url will not expose to crawler by bot and for some solution we must change configuration to get pretty urls.
+
+This Technical document contains how to make SEO Engine can indexed AngularJS.
+
+### Todo
++ Going to apache configuration find frontend apps virtualhost.
++ Add new config for get escaped_fragment variable.
++ Send variable to backend for get Pretty URLs.
+
+### Apache configuration
+```
+
+Options +FollowSymLinks
+RewriteEngine On
+
+# Redirect Trailing Slashes...
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Handle Front Controller...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [L]
+
+# parsing variable to api backend if user agent SEO bot.
+RewriteCond %{HTTP_USER_AGENT} baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest [NC,OR]
+RewriteCond %{QUERY_STRING} _escaped_fragment_=(.?)
+RewriteRule ^(.*)$ https://47b230b8.ngrok.io/x.php?$1 [R=302,QSA]
+
+```
+
+Description.
+1. HTTP_USER_AGENT Is bot agent client for access host.
+2. QUERY_STRING Is call query for get variable.
+3. https://47b230b8.ngrok.io/x.php?$1 is sample host for parsing to host api backend.
+
+Example log facebook bot scrape host.
+```
+::1 - - [29/Dec/2016:06:43:42 +0000] &quot;GET /?_escaped_fragment_=%2Fnews%2Fdetail%2FL1_tB8XoxMpoDbjm%2FReady-Prize HTTP/1.1&quot; 302 675 &quot;-&quot; &quot;facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)&quot;
+::1 - - [29/Dec/2016:07:14:34 +0000] &quot;GET /?_escaped_fragment_=%2Fnews%2Fdetail%2FKvOhB8XoxFJVaqiH%2FNews-Selebrasi-Merah-Putih HTTP/1.1&quot; 302 705 &quot;-&quot; &quot;facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)&quot;
+```
+
+Example get variable in host https://47b230b8.ngrok.io/x.php
+```
+&lt;h1&gt;testing&lt;/h1&gt;
+&lt;!--?php $hobsen=urldecode($_GET[&quot;_escaped_fragment_&quot;]); #echo $hobsen #twice urldecode for get clean url $query=urldecode($hobsen); #echo $query; $QChunks = explode(&quot;/&quot;, $hobsen); $QT=urldecode($QChunks[1]); $IDQT=urldecode($QChunks[3]); ?--&gt;
+&lt;!-- in meta propery for open graph can be parsing variable to content--&gt; &quot;/&gt;&quot;/&gt;
+&lt;h1&gt;testing&lt;/h1&gt;
+&lt;!--?php &lt;br ?--&gt; echo &quot;Get query = $query&quot;;
+echo &quot;type = $QT&quot;;
+echo &quot;ID type= $IDQT&quot;;
+?&gt;
+
+```

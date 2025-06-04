@@ -1,39 +1,57 @@
 const work = [
     {
-        slug: 'BigBossCorp',
-        company: 'Hypernova Labs',
-        title: 'Software Engineer',
-        start: 'Jan 2021',
+        slug: 'clean-medic-indus',
+        company: 'Clean Medic Indus, PT',
+        title: 'DevOps Engineer',
+        start: 'Mei 2022',
         end: 'Present',
-        description: 'Led a team of 5 building scalable microservices with Node.js and AWS.',
-        locations: ['Remote', 'New York City (Hybrid)']
+        description: 'Revolutionizing Medical Waste Management with a Digital Platform.',
+        locations: ['Bali', 'Indonesia']
     },
     {
-        slug: 'MediumBossCorp',
-        company: 'Big Brain Technologies',
-        title: 'Software Engineer',
-        start: 'Jul 2018',
-        end: 'Dec 2020',
-        description: 'Worked on the core platform, optimizing React apps and APIs.',
-        locations: ['Remote', 'New York City']
+        slug: 'gotomalls-com',
+        company: 'Gotomalls.com',
+        title: 'DevOps Engineer',
+        start: 'Nov 2016',
+        end: 'Mei 2022',
+        description: 'GoToMalls is the best geo-located and profile based smart directory of malls and stores based on customer testimony.',
+        locations: ['Bali', 'Indonesia']
     },
     {
-        slug: 'SmallBossCorp',
-        company: 'Small Boss Corp',
-        title: 'Software Engineer',
-        start: 'Jan 2017',
-        end: 'Jun 2018',
-        description: 'Assisted in developing web applications using PHP and MySQL.',
-        locations: ['Remote', 'San Francisco (Hybrid)'],
+        slug: 'aplikasi-prima-persada',
+        company: 'Aplikasi Prima Persada, PT (Apps Foundry)',
+        title: 'System Engineer',
+        start: 'Sep 2015',
+        end: 'Okt 2016',
+        description: 'Apps Foundry (Scoop) is an e-reader app that enables users to read magazines, books, tabloids, and newspapers via iOS, Android, and Windows Phone devices.',
+        locations: ['Jakarta', 'Indonesia'],
     },
     {
-        slug: 'InternBossCorp',
-        company: 'CodeNest',
-        title: 'Software Engineer Intern',
-        start: 'Mar 2021',
-        end: 'Sep 2021',
-        description: 'Building Java applications and learning about cloud technologies.',
-        locations: ['Vienna', 'Austra']
+        slug: 'unique',
+        company: 'Unique, PT',
+        title: 'IT Engineer',
+        start: 'Apr 2011',
+        end: 'Sep 2015',
+        description: 'Building Security system, solution planning and services in ICT area.',
+        locations: ['Jakarta', 'Indonesia']
+    },
+    {
+        slug: 'sutindo-raya-mulia',
+        company: 'Sutindo Raya Mulia, PT',
+        title: 'System Administrator Engineer',
+        start: 'Dec 2010',
+        end: 'Feb 2011',
+        description: 'Built with vision to be no.1 stainless steel player in Indonesia.',
+        locations: ['Jakarta', 'Indonesia']
+    },
+    {
+        slug: 'pas',
+        company: 'Putra Alinson Perkasa, PT',
+        title: 'IT Staff',
+        start: 'Sep 2005',
+        end: 'Nov 2010',
+        description: 'General Construction is a company specializing in engineering, project management, and construction.',
+        locations: ['Jakarta', 'Indonesia']
     }
 ]
 

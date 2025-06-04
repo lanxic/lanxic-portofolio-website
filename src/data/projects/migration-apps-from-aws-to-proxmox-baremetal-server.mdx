@@ -1,0 +1,69 @@
+---
+title: "Migration Apps from AWS to Proxmox Baremetal Server"
+teamSize: 1
+role: "Devops Developer"
+description: "A project focused on migrating applications from AWS cloud infrastructure to a self-hosted Proxmox bare-metal server, aiming to reduce costs, improve control, and optimize performance."
+duration: "11/2024–11/2024"
+techStack:
+    - AWS
+    - Docker
+    - Portainer
+    - Bash
+    - Proxmox
+    - MySQL
+    - PostgreSQL
+    - Laravel
+    - Flask
+    - Nginx
+    - Apache2
+    - Elasticsearch
+    - Beanstalk
+    - Redis
+    - Worker
+    - Cloudflare
+    - Pentaho
+
+githubUrl: ""
+---
+
+# Introduction
+
+A project focused on migrating applications from AWS cloud infrastructure to a self-hosted Proxmox bare-metal server, aiming to reduce costs, improve control, and optimize performance.
+
+## Key Features
+
+- **Cost Efficiency**: Substantial savings by eliminating AWS service fees and using owned hardware infrastructure.
+- **Complete Application Migration**: Full migration of services from AWS (EC2, RDS, S3) to Proxmox bare-metal server and containers.
+- **Containerization with Docker & Portainer**: Applications are packaged into Docker containers, managed via Portainer for easier deployment and updates.
+- **Multi-Environment Support**: Isolated environments (staging and production) built using Proxmox VMs and LXC containers.
+- **Reverse Proxy & Load Balancing**: Nginx configured with SSL, custom domains, and traffic routing, enhanced with Cloudflare for CDN and DDoS protection.
+- **Automated Backup & Restore**: Reliable data protection through automated backup scripts and scheduled cron jobs for databases and application files.
+- **Monitoring & Logging**: System logs and application metrics are centralized via Elasticsearch for better debugging and performance tracking.
+- **Optimized Resource Usage**: Efficient management of system resources across virtual machines and containers to maximize server performance..
+- **Multi-Environment Support**: Isolated environments (staging and production) built using Docker.
+
+## Technical Insights
+
+- **Infrastructure Virtualization**: Leveraged to run multiple image as docker in Proxmox bare-metal server, providing flexible isolation and efficient resource usage compared to traditional bare-metal setups.
+- **Container Orchestration with Portainer**: Used Portainer as a lightweight management UI to handle Docker container lifecycle, simplifying deployment and scaling without the complexity of Kubernetes.
+- **Network Configuration and Security**: Configured VLANs and firewall rules within Proxmox to segregate environments and secure internal traffic. Integrated Cloudflare as a reverse proxy and for DDoS protection, ensuring public-facing services remain available and secure.
+- **Database Migration Strategies**: Employed logical backups (mysqldump, pg_dump) combined with incremental syncing to minimize downtime when migrating MySQL and PostgreSQL databases from AWS RDS to on-premise servers.
+- **Automated Backup and Restore**: Developed Bash scripts scheduled via cron for nightly backups of databases and application data, with retention policies to manage storage usage efficiently.
+- **Performance Monitoring and Logging**: Set up Elasticsearch to aggregate logs from applications and system services, enabling centralized monitoring, alerting, and troubleshooting.
+- **Resource Optimization**: Fine-tuned CPU and memory allocations per VM/container to ensure optimal utilization without over-provisioning, balancing workload demands and server capacity.
+
+## Challenges and Solutions
+
+- **Minimizing Downtime During Migration**: Implemented incremental data synchronization techniques and scheduled migrations during off-peak hours to ensure minimal service disruption.
+- **Managing Resource Allocation on Baremetal**: Used Proxmox’s flexible VM and container resource limits and continuous monitoring to optimize CPU and memory usage without impacting application performance.
+- **Securing Public Access and Internal Networks**: Configured Cloudflare as a reverse proxy for DDoS protection and SSL termination, and set up VLANs and firewall rules within Proxmox to isolate sensitive environments.
+- **Data Backup and Recovery**: Developed automated backup scripts with retention policies and tested recovery procedures regularly to ensure data integrity and availability.
+
+## Outcome
+
+- Successfully migrated all targeted applications from AWS to Proxmox bare-metal infrastructure without significant downtime.
+- Achieved reduction in monthly infrastructure costs.
+- Improved control over deployment environments and resource allocation, leading to better performance tuning.
+- Enhanced security posture by implementing strict network segmentation and Cloudflare protections.
+- Established reliable automated backup and disaster recovery processes.
+- Provided comprehensive monitoring and logging that improved system observability and troubleshooting.
