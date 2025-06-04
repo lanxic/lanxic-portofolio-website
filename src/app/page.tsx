@@ -11,7 +11,7 @@ import {motion} from "framer-motion";
 import {
     FaMapMarkerAlt, FaBook, FaLanguage,
     FaGamepad, FaUniversity,
-    FaSkiing, FaBuilding, FaTools
+    FaBuilding, FaTools
 } from "react-icons/fa";
 
 /**
