@@ -18,7 +18,7 @@ This Technical document contains how to make SEO Engine can indexed AngularJS.
 + Send variable to backend for get Pretty URLs.
 
 ### Apache configuration
-```
+```shell
 
 Options +FollowSymLinks
 RewriteEngine On
@@ -44,13 +44,13 @@ Description.
 3. https://47b230b8.ngrok.io/x.php?$1 is sample host for parsing to host api backend.
 
 Example log facebook bot scrape host.
-```
+```shell
 ::1 - - [29/Dec/2016:06:43:42 +0000] &quot;GET /?_escaped_fragment_=%2Fnews%2Fdetail%2FL1_tB8XoxMpoDbjm%2FReady-Prize HTTP/1.1&quot; 302 675 &quot;-&quot; &quot;facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)&quot;
 ::1 - - [29/Dec/2016:07:14:34 +0000] &quot;GET /?_escaped_fragment_=%2Fnews%2Fdetail%2FKvOhB8XoxFJVaqiH%2FNews-Selebrasi-Merah-Putih HTTP/1.1&quot; 302 705 &quot;-&quot; &quot;facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)&quot;
 ```
 
 Example get variable in host https://47b230b8.ngrok.io/x.php
-```
+```shell
 &lt;h1&gt;testing&lt;/h1&gt;
 &lt;!--?php $hobsen=urldecode($_GET[&quot;_escaped_fragment_&quot;]); #echo $hobsen #twice urldecode for get clean url $query=urldecode($hobsen); #echo $query; $QChunks = explode(&quot;/&quot;, $hobsen); $QT=urldecode($QChunks[1]); $IDQT=urldecode($QChunks[3]); ?--&gt;
 &lt;!-- in meta propery for open graph can be parsing variable to content--&gt; &quot;/&gt;&quot;/&gt;
