@@ -15,6 +15,10 @@ Once installed on a control node, Ansible, which is an agentless architecture, c
 
 This Technical document contains how to used ssh forward agent for deployment of Ansible.
 
+| Target Audience      | Document Owner | Subject                               |
+| :-----------------   | :------------- | :------------------------------------ |
+| System Administrator | lanxic         | How to use ssh forwarding on Ansible |
+
 ### Todo
 + Goto your ansible directory.
 + Create file ansible.cfg in root directory.
@@ -31,7 +35,7 @@ if you using ubuntu you can run using apt `sudo apt-get install -y sshpass`.
 Go to your ansible project and create ansible.cfg in root directory.
 you can follow like my configuration in below:
 
-```
+```shell
 [ssh_connection]
 ssh_args = -o ControlPersist=15m -F group_vars/ssh_config -q
 scp_if_ssh = True
@@ -50,7 +54,7 @@ To be clear, the main configuration necessary here is the addition of the [ssh_c
 
 After that we must create ssh config file for this example I put in group_var you can put anywhere you want just make same path in ansible.cfg.
 
-```
+```shell
 Host cool-nat-doc
   HostName 192.168.2.12
   User root
@@ -72,14 +76,14 @@ For that config Iam using proxy command and use group_var/ssh_config for refrenc
 
 Ok...for now we must setup inventory host, in my configure I put host into my inventory.
 
-```
+```shell
 [tester]
 cool-web-doc
 ```
 
 I think that&#039;s enough ok lets test.
 
-```
+```shell
 alex@Alex-Laptop:~/src/listen/ansible_ges$ ansible-playbook -i hosts.ini site-test.yml -vvv
 Using /home/alex/src/listen/ansible_ges/ansible.cfg as config file
 

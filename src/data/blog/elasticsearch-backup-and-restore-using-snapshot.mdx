@@ -31,7 +31,7 @@ This Technical document contains for backup and restore snapshot of Elasticsearc
 ### Install python-pip
 Install using apt-get for quick.
 
-```sh
+```shell
 alex@Alex-Laptop:~$ apt-get install -y python-pip
 alex@Alex-Laptop:~$ python --version
 Python 2.7.6
@@ -40,7 +40,7 @@ Python 2.7.6
 ### Install component packages
 After we install pip now we can install all requirement packages.
 
-```sh
+```shell
 alex@Alex-Laptop:~$ sudo pip install -r req.txt
 ```
 wait until installing finish.
@@ -48,7 +48,7 @@ wait until installing finish.
 ### Testing
 See `es-config.json` please add your aws_access_key_id and aws_secret_access_key for your bucket.
 
-```sh
+```shell
 alex@Alex-Laptop:~$ ./es-backup-restore.py
 Usage: es-backup-restore.py [OPTIONS]
 example: es-backup-restore.py -c es-config.json -a localhost -p 9200 -b backup|restore
