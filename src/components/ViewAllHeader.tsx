@@ -20,9 +20,11 @@ export default function ViewAllHeader({title, pageUrl, itemCount}: ViewAllButton
                 href={pageUrl}
                 className="relative inline-block text-blue-500 text-sm transition-all duration-300 group hover:text-blue-400"
             >
-                <span className="group-hover:underline group-hover:decoration-transparent">
-                    View all ({itemCount})
-                </span>
+                {pageUrl !== "#" && (
+                    <span className="group-hover:underline group-hover:decoration-transparent">
+                        View all ({itemCount})
+                    </span>
+                )}
                 <span
                     className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full"
                 ></span>
