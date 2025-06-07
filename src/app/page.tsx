@@ -3,6 +3,7 @@
 import blog from "@/data/blog";
 import projects from "@/data/projects";
 import work from "@/data/work";
+import edu from "@/data/edu";
 import WorkItem from "@/components/WorkItem";
 import ProjectTile from "@/components/ProjectTile";
 import BlogPost from "@/components/BlogPost";
@@ -13,6 +14,7 @@ import {
     FaGamepad, FaUniversity,
     FaBuilding, FaTools
 } from "react-icons/fa";
+import EduItem from "@/components/EduItem";
 
 /**
  * Home component that serves as the main landing page for the portfolio.
@@ -125,6 +127,30 @@ export default function Home() {
                             viewport={{once: true}}
                         >
                             <ProjectTile key={proj.slug} {...proj} />
+                        </motion.div>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Recent Edu */}
+            <motion.div
+                initial={{opacity: 0, y: 20}}
+                whileInView={{opacity: 1, y: 0}}
+                transition={{duration: 1}}
+                viewport={{once: true}}
+                className="mt-16"
+            >
+                <ViewAllHeader title="Education" pageUrl="#" itemCount={edu.length}/>
+                <div className="grid gap-4">
+                    {edu.slice(0, 3).map((univ, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{opacity: 0, y: 20}}
+                            whileInView={{opacity: 1, y: 0}}
+                            transition={{duration: 1}}
+                            viewport={{once: true}}
+                        >
+                            <EduItem {...univ} />
                         </motion.div>
                     ))}
                 </div>
