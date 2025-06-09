@@ -60,6 +60,15 @@ export default function RootLayout({children}: { children: ReactNode }) {
         <head>
             <script dangerouslySetInnerHTML={{__html: themeInitScript}}/>
             <title>ARicho - Developer Engineering Portfolio</title>
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-J02Y6R2SFW"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
+
+                gtag('config', 'G-J02Y6R2SFW');
+            </script>
         </head>
         <body
             className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}
