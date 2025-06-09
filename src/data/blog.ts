@@ -43,6 +43,20 @@ const posts: BlogPostProps[] = [
         date: '2010-11-26',
         tags: ['public']
     },
+    {
+        slug: 'langkah-mudah-replikasi-master-slave-di-mysql-dengan-docker',
+        title: 'Langkah Mudah Replikasi Master-Slave di MySQL dengan Docker',
+        summary: 'Master-Slave Replication adalah metode replikasi database yang memungkinkan satu server (master) mengontrol replikasi data ke satu atau lebih server lainnya (slave). Dengan konfigurasi ini, proses read dapat dibebankan ke slave, sehingga mengurangi beban kerja di server master.',
+        date: '2017-01-20',
+        tags: ['mysql', 'docker']
+    },
+    {
+        slug: 'elasticsearch-backup-and-restore',
+        title: 'Elasticsearch Backup and restore',
+        summary: 'Artikel ini menjelaskan cara melakukan backup dan restore data pada Elasticsearch menggunakan fitur snapshot. Panduan ini mencakup instalasi Python 2.7, pemasangan paket pendukung, serta contoh penggunaan script untuk melakukan backup dan restore data Elasticsearch dengan penyimpanan di S3 Bucket.',
+        date: '2017-02-23',
+        tags: ['elasticsearch', 'bash', 'scripting']
+    },
 
 ]
 
