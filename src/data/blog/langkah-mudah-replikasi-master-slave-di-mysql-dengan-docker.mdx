@@ -1,0 +1,243 @@
+---
+title: "Langkah Mudah Replikasi Master-Slave di MySQL dengan Docker"
+summary: "Master-Slave Replication adalah metode replikasi database yang memungkinkan satu server (master) mengontrol replikasi data ke satu atau lebih server lainnya (slave). Dengan konfigurasi ini, proses read dapat dibebankan ke slave, sehingga mengurangi beban kerja di server master."
+date: "2017-01-20"
+tags:
+  - mysql
+  - docker
+---
+
+**Master-Slave replication (MSR)** is a model of communication where one device or process has unidirectional control over one or more other devices, often built-in. In database replication, the master database is regarded as the authoritative source, and the slave databases are synchronized to it. Usualy MSR database will using doing CRUD for master and READ for slave, so the application not make master database to much load cpu to doing all job. For how it works lets follow me step by step replicate.I assume you have two mysql server for we do master and slave. In this testing Iam using docker for my testing environment.
+
+```shell
+    alex@Alex-Laptop:~$ docker ps -a
+    CONTAINER ID        IMAGE                    COMMAND                  CREATED              STATUS                    PORTS               NAMES
+    c343f23b6e18        db-local                 "/bin/sh -c '/bin/sh "   About a minute ago   Up About a minute                             mysql-slave
+    55512c02ed39        db-local                 "/bin/sh -c '/bin/sh "   2 minutes ago        Up 2 minutes                                  mysql-master
+```
+
+for mysql-master I set with ip `10.11.0.5` and mysql-slave with ip `10.11.0.6`. Oiy Iam using mysql with Server version: 5.5.53-0ubuntu0.14.04.1-log (Ubuntu). After our server ready now we login to mysql-master we must change config in `my.cnf`
+
+```shell
+    bind-address        = 0.0.0.0
+    server-id       = 1
+```
+
+To be clear, the main configuration necessary here is the addition of the my configuration:
+
+*   **bind-address** it's mean mysql can be allow from public network or internal network.
+*   **server-id** it's we give id for master, no problem if you want to give 100 or any number.
+
+After you add that value, save and exit now login to mysql using root user. Dont forgot to restart or reload service.
+```shell
+    root@55512c02ed39:/etc/mysql# sudo /etc/init.d/mysql restart
+     * Stopping MySQL database server mysqld                                                                                                                                                                                                                        [ OK ]
+     * Starting MySQL database server mysqld                                                                                                                                                                                                                        [ OK ]
+     * Checking for tables which need an upgrade, are corrupt or were
+    not closed cleanly
+```
+
+Iam testing to show database in mysql-master with `show databases` and see user in mysql `select user,host from mysql.user`
+
+```shell
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    +--------------------+
+    3 rows in set (0.02 sec)
+
+    mysql> select user,host from mysql.user;
+    +------------------+--------------+
+    | user             | host         |
+    +------------------+--------------+
+    | root             | 127.0.0.1    |
+    | root             | 55512c02ed39 |
+    | root             | ::1          |
+    | debian-sys-maint | localhost    |
+    | root             | localhost    |
+    +------------------+--------------+
+    5 rows in set (0.00 sec)
+```
+
+For doing replicate we must create one user for replicate privilege slave in my sample I create user replicate.
+
+```shell
+    mysql> GRANT REPLICATION SLAVE ON *.* TO 'replicate'@'%' IDENTIFIED BY 'this-password-you-must-be-change';
+    mysql> select user,host from mysql.user;
+    +------------------+--------------+
+    | user             | host         |
+    +------------------+--------------+
+    | replicate        | %            |
+    | root             | 127.0.0.1    |
+    | root             | 55512c02ed39 |
+    | root             | ::1          |
+    | debian-sys-maint | localhost    |
+    | root             | localhost    |
+    +------------------+--------------+
+    6 rows in set (0.00 sec)
+```
+
+In this case Iam use multiple host to access mysql with user replicate and you can change with specific ip network. dont forget to give flush privileges.
+
+```shell
+    mysql> flush privileges;
+```
+
+Let's lock tables for get last position after that dump all database in master and unlock again mysql.
+
+```shell
+    mysql> flush tables with read lock;
+    Query OK, 0 rows affected (0.01 sec)
+
+    root@55512c02ed39:~# mysqldump -u root -p --all-databases --lock-all-tables --events > mysql_dump_master.sql
+
+    mysql> unlock tables;
+    Query OK, 0 rows affected (0.00 sec)
+
+    mysql> show master status;
+    +------------------+----------+--------------+------------------+
+    | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
+    +------------------+----------+--------------+------------------+
+    | mysql-bin.000003 |      107 |              |                  |
+    +------------------+----------+--------------+------------------+
+    1 row in set (0.00 sec)
+```
+
+Now we see in status master ready in mysql-bin.000003 and position `107` that information to give slave syncronize db. Until here for master done now send file `mysql_dump_master.sql` to server Slave and move to mysql-slave mechine. Same with master we must set server-id in my.cnf.
+
+```shell
+    bind-address        = 0.0.0.0
+    server-id       = 2
+    read_only = ON
+```
+
+Dont forgot to restart or reload service.
+
+```shell
+    root@c343f23b6e18:/etc/mysql# sudo /etc/init.d/mysql restart
+     * Stopping MySQL database server mysqld                                                                                                                                                                                                                        [ OK ]
+     * Starting MySQL database server mysqld                                                                                                                                                                                                                        [ OK ]
+     * Checking for tables which need an upgrade, are corrupt or were
+    not closed cleanly
+```
+
+Now dump mysql master to db and login to mysql with root user we will give syncronize to mysql-master.
+
+```shell
+    root@c343f23b6e18:~# mysql -u root -p < mysql_dump_master.sql
+    Enter password: <put-your-password>
+
+    mysql> change master to master_host='10.11.0.5', master_user='replicate', master_password='this-password-you-must-be-change', master_log_file='mysql-bin.000003', master_log_pos=107;
+    Query OK, 0 rows affected (0.03 sec)
+
+    mysql> start slave;
+    Query OK, 0 rows affected (0.00 sec)
+
+    mysql> show slave status\G;
+    *************************** 1. row ***************************
+                   Slave_IO_State: Waiting for master to send event
+                      Master_Host: 10.11.0.5
+                      Master_User: replicate
+                      Master_Port: 3306
+                    Connect_Retry: 60
+                  Master_Log_File: mysql-bin.000003
+              Read_Master_Log_Pos: 107
+                   Relay_Log_File: mysqld-relay-bin.000004
+                    Relay_Log_Pos: 253
+            Relay_Master_Log_File: mysql-bin.000003
+                 Slave_IO_Running: Yes
+                Slave_SQL_Running: Yes
+                  Replicate_Do_DB:
+              Replicate_Ignore_DB:
+               Replicate_Do_Table:
+           Replicate_Ignore_Table:
+          Replicate_Wild_Do_Table:
+      Replicate_Wild_Ignore_Table:
+                       Last_Errno: 0
+                       Last_Error:
+                     Skip_Counter: 0
+              Exec_Master_Log_Pos: 107
+                  Relay_Log_Space: 556
+                  Until_Condition: None
+                   Until_Log_File:
+                    Until_Log_Pos: 0
+               Master_SSL_Allowed: No
+               Master_SSL_CA_File:
+               Master_SSL_CA_Path:
+                  Master_SSL_Cert:
+                Master_SSL_Cipher:
+                   Master_SSL_Key:
+            Seconds_Behind_Master: 0
+    Master_SSL_Verify_Server_Cert: No
+                    Last_IO_Errno: 0
+                    Last_IO_Error:
+                   Last_SQL_Errno: 0
+                   Last_SQL_Error:
+      Replicate_Ignore_Server_Ids:
+                 Master_Server_Id: 1
+    1 row in set (0.00 sec)
+
+```
+
+Yups this slave now ready to wait master event...ok lets test to create database. Here database in slave
+```shell
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    +--------------------+
+    3 rows in set (0.01 sec)
+```
+
+And now just create new database with name testing\_to\_replicate in mysql-master
+
+```shell
+    mysql> create database testing_to_replicate;
+    Query OK, 1 row affected (0.00 sec)
+
+    mysql> show databases;
+    +----------------------+
+    | Database             |
+    +----------------------+
+    | information_schema   |
+    | mysql                |
+    | performance_schema   |
+    | testing_to_replicate |
+    +----------------------+
+    4 rows in set (0.00 sec)
+```
+
+Binggo you wiil be see the new database has been replicate on mysql-slave.
+
+```shell
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    +--------------------+
+    3 rows in set (0.01 sec)
+
+    mysql> show databases;
+    +----------------------+
+    | Database             |
+    +----------------------+
+    | information_schema   |
+    | mysql                |
+    | performance_schema   |
+    | testing_to_replicate |
+    +----------------------+
+    4 rows in set (0.00 sec)
+
+    mysql>
+```
+Ok that's enough for replicate master and slave on mysql. Thanks for visiting my blog.

@@ -1,0 +1,70 @@
+---
+title: "Elasticsearch Backup and restore"
+summary: "Artikel ini menjelaskan cara melakukan backup dan restore data pada Elasticsearch menggunakan fitur snapshot. Panduan ini mencakup instalasi Python 2.7, pemasangan paket pendukung, serta contoh penggunaan script untuk melakukan backup dan restore data Elasticsearch dengan penyimpanan di S3 Bucket."
+date: "2017-02-23"
+tags:
+  - elasticsearch
+  - bash
+  - scripting
+---
+
+[Elasticsearch](https://www.elastic.co) adalah mesin pencari berbasis Lucene. Ia menyediakan mesin pencari full-text yang terdistribusi dan multi-tenant-capable dengan antarmuka web HTTP dan dokumen JSON tanpa skema. Elasticsearch dikembangkan menggunakan Java dan dirilis sebagai open source di bawah lisensi Apache ([Wikipedia](https://en.wikipedia.org/wiki/Elasticsearch)).
+
+Untuk backup dan restore data, Elasticsearch memiliki fitur snapshot.
+
+| Target Audience      | Document Owner | Subject                         | Repository                                                                 |
+|----------------------|----------------|--------------------------------|----------------------------------------------------------------------------|
+| System Administrator | lanxic         | Backup and restore data elasticsearch | [github](https://github.com/lanxic/elasticsearch-snap-backup-restore) |
+
+Dokumen teknis ini berisi panduan untuk melakukan backup dan restore snapshot Elasticsearch, kemudian menguploadnya ke S3 Bucket.
+
+---
+
+## Todo
+
+- Install Python 2.7.x (dalam panduan ini diuji pada versi 2.7).
+- Install komponen paket pendukung.
+- Uji coba backup.
+- Uji coba restore.
+
+---
+
+## Install python-pip
+
+Install menggunakan apt-get untuk cara cepat:
+```shell
+    alex@Alex-Laptop:~$ apt-get install -y python-pip
+    alex@Alex-Laptop:~$ python --version
+    Python 2.7.6
+```
+
+### Install component packages
+
+After we install pip now we can install all requirement packages.
+```shell
+    alex@Alex-Laptop:~$ sudo pip install -r req.txt
+```
+
+wait until installing finish.
+
+### Testing
+
+See `es-config.json` please add your aws\_access\_key\_id and aws\_secret\_access\_key for your bucket.
+```shell
+    alex@Alex-Laptop:~$ ./es-backup-restore.py
+    Usage: es-backup-restore.py [OPTIONS]
+    example: es-backup-restore.py -c es-config.json -a localhost -p 9200 -b backup|restore
+
+    Where OPTIONS:
+    -a HOST       Specify URL address of the Elasticsearch server
+    -p PORT       Specify Port of the Elasticsearch server
+    -c FILE       Specify path of config file
+    -h            Printing the help
+    -b            To do job ex:backup or restore
+    -v            Print the version
+```
+
+well in the OPTIONS we can see how to work with this script.
+just follow that example if you want to backup use option `-b` with backup and if you want to restore change with restore.
+
+_NOTE : this code only work in same server with elasticsearch machine._
