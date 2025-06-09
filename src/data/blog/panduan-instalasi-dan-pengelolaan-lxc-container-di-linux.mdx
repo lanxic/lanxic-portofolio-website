@@ -1,0 +1,130 @@
+---
+title: "Panduan Instalasi dan Pengelolaan LXC Container di Linux"
+summary: "Dokumen teknis ini menjelaskan cara instalasi dan konfigurasi LXC container di Linux, mulai dari pemasangan paket, pengunduhan image container, hingga menjalankan dan mengelola container dengan perintah dasar LXC."
+date: "2017-03-30"
+tags:
+  - lxc
+  - bash
+  - linux container
+---
+
+
+[LXC](https://linuxcontainers.org/lxc/introduction/) adalah interface userspace untuk fitur containment kernel Linux. Dengan API yang kuat dan alat sederhana, LXC memungkinkan pengguna Linux dengan mudah membuat dan mengelola container sistem atau aplikasi.
+
+Dokumen teknis ini berisi konfigurasi yang digunakan untuk deployment container LXC.
+
+## Todo
+
+- Install lxc.
+- Install lxc-templates (template tidak terpasang otomatis dengan `sudo apt-get install lxc`).
+- Download images untuk container.
+- Menjalankan images.
+
+
+## Install lxc container
+
+Saya menggunakan Ubuntu sebagai host container, jadi untuk instalasi cepat LXC container gunakan apt:
+
+```bash
+alex@Alex-Laptop:~$ apt-get install -y lxc
+````
+
+
+## Download images for container
+
+Setelah LXC terpasang, sekarang kita download image:
+
+```bash
+alex@Alex-Laptop:~$ sudo lxc-create -t download -n [images-name] -- --dist ubuntu --release trusty --arch amd64
+```
+
+Perintah di atas mendownload distro Ubuntu dengan release trusty dan arsitektur 64bit.
+
+Jika proses selesai, kamu dapat melihat image dengan perintah:
+
+```bash
+sudo lxc-ls --fancy
+```
+
+Contoh output:
+
+```
+NAME           STATE   AUTOSTART GROUPS IPV4 IPV6
+[images-name] STOPPED 0         -      -    -
+```
+
+
+## Running Images
+
+Untuk menjalankan image gunakan perintah berikut:
+
+```bash
+alex@Alex-Laptop:~$ sudo lxc-start --name [images-name] --daemon
+```
+
+Perintah ini menjalankan container dalam mode daemon. Kamu bisa cek status dan IP container:
+
+```bash
+NAME           STATE   AUTOSTART GROUPS IPV4       IPV6
+[images-name] RUNNING 0         -      10.0.3.164 -
+```
+
+
+## Mengatur Auto Start Container
+
+Jika kamu ingin container otomatis berjalan saat server hidup, ubah konfigurasi seperti ini:
+
+```bash
+alex@Alex-Laptop:~$ sudo vi /var/lib/lxc/orbit-logstash/config
+...
+lxc.start.auto = 1
+...
+```
+
+Lalu cek kembali dengan:
+
+```bash
+alex@Alex-Laptop:~$ sudo lxc-ls --fancy
+NAME           STATE   AUTOSTART GROUPS IPV4       IPV6
+[images-name] RUNNING 1         -      10.0.3.164 -
+```
+
+Menambahkan `lxc.start.auto = 1` ke konfigurasi mengaktifkan auto start. Kamu juga bisa mengubah alamat IP dalam file konfigurasi ini.
+
+
+## Informasi Container
+
+Untuk melihat informasi detail container gunakan:
+
+```bash
+alex@Alex-Laptop:~$ sudo lxc-info --name [images-name]
+```
+
+Contoh output:
+
+```shell
+Name:           [images-name]
+State:          RUNNING
+PID:            29141
+IP:             10.0.3.164
+CPU use:        1.18 seconds
+BlkIO use:      304.00 KiB
+Memory use:     5.96 MiB
+KMem use:       0 bytes
+Link:           vethE92PEP
+ TX bytes:      3.82 KiB
+ RX bytes:      3.40 KiB
+ Total bytes:   7.22 KiB
+```
+
+
+## Login ke Container
+
+Untuk masuk ke dalam container gunakan:
+
+```bash
+alex@Alex-Laptop:~$ sudo lxc-attach --name [images-name]
+```
+
+
+Itu saja. Jika ingin tahu lebih lanjut, kunjungi dokumen resmi [lxc container](https://linuxcontainers.org/lxc/introduction/).
