@@ -28,7 +28,22 @@ const posts: BlogPostProps[] = [
         summary: 'Ansible is an open-source automation engine that automates cloud provisioning, configuration management, and application deployment. Once installed on a control node, Ansible, which is an agentless architecture, connects to a managed node through the default OpenSSH connection type.',
         date: '2025-04-18',
         tags: ['git', 'ansible', 'ssh', 'automation', 'devops']
-    }
+    },
+    {
+        slug: 'cukupkah-membeli-kebahagiaan-dengan-segepok-uang',
+        title: 'Cukupkah Membeli Kebahagiaan dengan Segepok Uang?',
+        summary: 'Papa, aku mau ajak Papa main ular tangga... cuma tiga puluh menit aja. Mama bilang waktu Papa sangat berharga, jadi aku mau bayar pakai tabunganku...',
+        date: '2011-01-25',
+        tags: ['public']
+    },
+    {
+        slug: 'perpisahan-bukan-akhir-tapi-awal-langkah-baru',
+        title: 'Perpisahan Bukan Akhir, Tapi Awal Langkah Baru',
+        summary: 'Tak terasa, di penghujung perpisahan bersama PT. PAS setelah lima tahun perjalanan penuh makna, kini saatnya saya melangkah untuk mengejar cita-cita menjadi profesional di bidang IT.',
+        date: '2010-11-26',
+        tags: ['public']
+    },
+
 ]
 
 export default posts
