@@ -57,6 +57,13 @@ const posts: BlogPostProps[] = [
         date: '2017-02-23',
         tags: ['elasticsearch', 'bash', 'scripting']
     },
+    {
+        slug: 'panduan-instalasi-dan-pengelolaan-lxc-container-di-linux',
+        title: 'Panduan Instalasi dan Pengelolaan LXC Container di Linux',
+        summary: 'Dokumen teknis ini menjelaskan cara instalasi dan konfigurasi LXC container di Linux, mulai dari pemasangan paket, pengunduhan image container, hingga menjalankan dan mengelola container dengan perintah dasar LXC.',
+        date: '2017-03-30',
+        tags: ['lxc', 'bash', 'linux container']
+    },
 
 ]
 
