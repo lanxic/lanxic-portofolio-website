@@ -64,7 +64,7 @@ export default function Home() {
                             {icon: FaMapMarkerAlt, label: "Bali, Indonesia"},
                             {icon: FaBook, label: "Researcher enthusiast"},
                             {icon: FaLanguage, label: "EN / ID"},
-                            {icon: FaTools, label: "Full-Stack Dev / DevOps"},
+                            {icon: FaTools, label: "DevOps"},
                             {icon: FaGamepad, label: "Sci-fi Fan"},
                         ].map((fact, i) => {
                             const Icon = fact.icon;
