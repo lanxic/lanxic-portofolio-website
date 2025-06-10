@@ -41,7 +41,7 @@ export default function Breadcrumbs() {
         <div className="flex items-center gap-1 text-lg text-black dark:text-white">
             <Link href="/" className="hover:text-blue-400 font-semibold">
                 {/* Initials on mobile */}
-                <span className="block md:hidden">RAR</span>
+                <span className="block md:hidden">ARicho</span>
                 {/* Full name on desktop */}
                 <span className="hidden md:inline">ARicho</span>
             </Link>
