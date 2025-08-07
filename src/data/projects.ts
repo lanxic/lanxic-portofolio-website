@@ -1,5 +1,14 @@
 const projects = [
     {
+        slug: 'bali-dev-access',
+        title: 'BaliDevAccess - Digital Solutions Provider',
+        image: '/projects/bda.png',
+        description: 'PT BaliDevAccess is a Bali-based software development company specializing in custom web and mobile applications for business digital transformation.',
+        startDate: '2025-06',
+        endDate: '2025-06',
+        techStack: ['Nextjs', 'Vercel', 'Authjs', 'Node'],
+    },
+    {
         slug: 'migration-apps-from-aws-to-proxmox-baremetal-server',
         title: 'Migration Apps from AWS to Proxmox Baremetal Server',
         image: '/projects/gtm.png',
