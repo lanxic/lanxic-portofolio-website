@@ -12,8 +12,10 @@ const gabarito = Gabarito({
 });
 
 export const metadata: Metadata = {
-    title: 'ARicho - Developer Engineering Portfolio',
-    description: 'This site serves as a space for my technical documentation and real-world experiences throughout my journey in DevOps engineering.',
+    robots: {
+        index: false,
+        follow: false,
+    },
     icons: {
         icon: '/icons/favicon.ico',
         shortcut: '/icons/favicon.ico',
@@ -59,8 +61,6 @@ export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en" className={`${gabarito.className} ${gabarito.variable}`} suppressHydrationWarning>
         <head>
-            <script dangerouslySetInnerHTML={{__html: themeInitScript}}/>
-            <GoogleAnalytics gaId="G-J02Y6R2SFW" />
             <title>ARicho - Developer Engineering Portfolio</title>
         </head>
         <body
