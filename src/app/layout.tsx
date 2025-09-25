@@ -1,7 +1,6 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import {Gabarito} from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google';
 import React, {ReactNode} from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -44,18 +43,6 @@ export const metadata: Metadata = {
     }
 }
 
-// This script initializes the theme based on user preference or saved settings
-// And is used to avoid FOUC (Flash of Unstyled Content) on the initial load
-const themeInitScript = `
-(function() {
-  try {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-    document.documentElement.classList.add(theme);
-    if (theme === 'dark') document.documentElement.classList.add('dark');
-  } catch(e) {}
-})();`
 
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
@@ -66,16 +53,6 @@ export default function RootLayout({children}: { children: ReactNode }) {
         <body
             className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}
         >
-        {/* Dot Background Layer */}
-        {/*<div*/}
-        {/*    className={`*/}
-        {/*    fixed inset-0 -z-10*/}
-        {/*    bg-[radial-gradient(circle,_#d1d5db_1px,_transparent_1px)]*/}
-        {/*    dark:bg-[radial-gradient(circle,_#3f3f46_1px,_transparent_1px)]*/}
-        {/*    bg-[length:30px_30px]*/}
-        {/*    [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]*/}
-        {/*  `}*/}
-        {/*/>*/}
 
         <Header/>
         <main className="flex-grow container mx-auto px-4 py-6">{children}</main>
