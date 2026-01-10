@@ -1,5 +1,14 @@
 const projects = [
     {
+        slug: 'amarta-whs',
+        title: 'Amarta WHS - Warehouse Management System',
+        image: '/projects/amarta-whs.png',
+        description: 'A comprehensive Warehouse Management System (WHS) modeled for Amarta to streamline inventory tracking, order processing, and logistics operations.',
+        startDate: '2026-01',
+        endDate: 'Present',
+        techStack: ['Laravel', 'MySQL', 'Bootstrap'],
+    },
+    {
         slug: 'bali-dev-access',
         title: 'BaliDevAccess - Digital Solutions Provider',
         image: '/projects/bda.png',
