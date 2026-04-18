@@ -1,5 +1,14 @@
 const projects = [
     {
+        slug: 'balivit',
+        title: 'Balivit - Comprehensive Bali Travel Guide',
+        image: '/projects/balivit.png',
+        description: 'Discover the best travel experiences in Bali. Restaurants, activities, accommodations, and destination guides from local experts.',
+        startDate: '2026-04',
+        endDate: 'Present',
+        techStack: ['Laravel', 'MySQL', 'Nextjs', 'Vercel', 'Node'],
+    },
+    {
         slug: 'amarta-whs',
         title: 'Amarta WHS - Warehouse Management System',
         image: '/projects/amarta-whs.png',

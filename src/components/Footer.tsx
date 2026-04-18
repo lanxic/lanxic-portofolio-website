@@ -58,7 +58,7 @@ export default function Footer() {
                     <span
                         className="font-semibold hover:text-blue-500 transition-colors duration-200"
                     >
-                        @lanxic
+                        AlX Manroe
                     </span>
                 </Link>
                 &nbsp;forked from&nbsp;<Link href={'https://github.com/alemoraru/nextjs-portofolio-website'}>@alemoraru</Link>
