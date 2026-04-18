@@ -59,7 +59,7 @@ export default function Home() {
 
                     <div className="flex flex-wrap justify-center gap-3 px-4 max-w-4xl mx-auto">
                         {[
-                            {icon: FaBuilding, label: "Mailokal Labs"},
+                            {icon: FaBuilding, label: "AlX Manroe Labs"},
                             {icon: FaUniversity, label: "Computer Science"},
                             {icon: FaMapMarkerAlt, label: "Bali, Indonesia"},
                             {icon: FaBook, label: "Researcher enthusiast"},
