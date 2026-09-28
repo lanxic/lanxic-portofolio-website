@@ -2,8 +2,7 @@ import type {Metadata} from "next";
 import "./globals.css";
 import {Gabarito} from "next/font/google";
 import React, {ReactNode} from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import DomainRedirect from "@/components/DomainRedirect";
 
 const gabarito = Gabarito({
     variable: "--font-gabarito",
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
 }
 
 
-export default function RootLayout({children}: { children: ReactNode }) {
+export default function RootLayout({}: { children: ReactNode }) {
     return (
         <html lang="en" className={`${gabarito.className} ${gabarito.variable}`} suppressHydrationWarning>
         <head>
@@ -54,9 +53,8 @@ export default function RootLayout({children}: { children: ReactNode }) {
             className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}
         >
 
-        <Header/>
-        <main className="flex-grow container mx-auto px-4 py-6">{children}</main>
-        <Footer/>
+        {/* lanxic.my.id has moved to alexmanroe.my.id: every route shows the redirect notice. */}
+        <DomainRedirect/>
         </body>
         </html>
     )
